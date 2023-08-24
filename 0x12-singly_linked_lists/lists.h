@@ -1,26 +1,26 @@
-#ifndef CUSTOM_LINKED_LIST_H
-#define CUSTOM_LINKED_LIST_H
+#ifndef LISTS_H
+#define LISTS_H
 
 /**
- * struct custom_list_node - singly linked list node
- * @str: string (allocated using malloc)
- * @len: length of the string
- * @next: points to the next node
+ * stru
+ * @str: gfgfg
+ * @len: hey
+ * @next: ok
  *
- * Description: Defines a node structure for a singly linked list
- * used in a custom project.
+ * Description: list
+ * for Holberton project
  */
-typedef struct custom_list_node
+typedef struct list_s
 {
 	char *str;
 	unsigned int len;
-	struct custom_list_node *next;
-} custom_list_t;
+	struct list_s *next;
+} list_t;
 
-size_t custom_print_list(const custom_list_t *h);
-size_t custom_list_len(const custom_list_t *h);
-custom_list_t *custom_add_node(custom_list_t **head, const char *str);
-custom_list_t *custom_add_node_end(custom_list_t **head, const char *str);
-void custom_free_list(custom_list_t *head);
+size_t print_list(const list_t *h);
+size_t list_len(const list_t *h);
+list_t *add_node(list_t **head, const char *str);
+list_t *add_node_end(list_t **head, const char *str);
+void free_list(list_t *head);
 
 #endif
