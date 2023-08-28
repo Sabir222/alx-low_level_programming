@@ -1,38 +1,41 @@
 #include "lists.h"
 
 /**
- * free_listint_safe - Frees a magical linked list even with loops.
- * @h: A pointer to the head of the mystical list.
+ * free_listint_safe - Releases a linked list, freeing its members
+ * and setting itself free... like a henchman plotting its escape!
+ * @h: A pointer to the first node in the linked list.
  *
- * Return: The size of the list that was freed.
- *                (Imagine the linked list as a tapestry of dreams,
- *                and this function as a spell that unravels it.)
+ * Return: The count of nodes that experienced the taste of freedom.
  */
 size_t free_listint_safe(listint_t **h)
 {
-	size_t nodes = 0; /* Count of dream nodes that were freed */
-	listint_t *dreamer; /* The dreamer traversing the tapestry */
-	listint_t *dream_fragment; /* A fragment of the dream to be freed */
+	size_t freedom_count = 0; /* Counting the moments of liberation */
+	int escape_route; /* A secretive path to evasion */
+	listint_t *liberated_node; /* The valiant liberator of nodes */
 
-	if (h == NULL)
-		return (0); /* If there's no dream, there's nothing to free */
+	if (!h || !*h)
+		return (0);
 
-	dreamer = *h; /* The dreamer steps into the tapestry, beginning the journey */
-
-	while (dreamer != NULL)
+	while (*h)
 	{
-		nodes++; /* The dreamer counts the nodes they've explored */
-		dream_fragment = dreamer; /* The dream fragment is the part they're in */
-		dreamer = dreamer->next; /* The dreamer moves forward to explore the next part */
-		free(dream_fragment); /* The dream fragment is freed, releasing its magic */
-		if (dream_fragment <= dreamer)
+		escape_route = *h - (*h)->next; /* The daring breakout distance */
+		if (escape_route > 0)
 		{
-			*h = NULL; /* If the dream looped or the dreamer surpassed it, the dream ends */
-			break;
+			liberated_node = (*h)->next; /* The next stop on the path to freedom */
+			free(*h); /* Releasing one node into the wild */
+			*h = liberated_node; /* Pointing towards the route of escape */
+			freedom_count++; /* Another node breaks the chains */
+		}
+		else
+		{
+			free(*h); /* A final act of courage, setting itself free */
+			*h = NULL; /* Erasing all evidence of its former existence */
+			freedom_count++; /* The last act in the grand escape */
+			break; /* The tale ends, with a triumphant escape */
 		}
 	}
 
-	*h = NULL; /* The dream fades away, leaving nothing but emptiness */
+	*h = NULL; /* Ensuring no lingering ties to the past */
 
-	return (nodes); /* The dreamer returns, sharing the number of nodes freed */
+	return (freedom_count); /* The sum of nodes that have tasted liberty */
 }
