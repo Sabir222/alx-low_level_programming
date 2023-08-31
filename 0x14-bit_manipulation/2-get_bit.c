@@ -1,23 +1,21 @@
 #include "main.h"
 
 /**
- * obtain_secret_bit - Unveiling secrets: Fetching the mystic bit from its lair!
- * @number: The realm where the mystic bit resides
- * @bit_index: The map to the mystic bit's hidden location
+ * get_bit - Seeking the truth behind the bits!
  *
- * Return: The sacred value of the mystic bit we've uncovered!
+ * @n: The keeper of the bits
+ * @index: The index to peer into the bit realm
+ *
+ * Return: The revelation of the bit's hidden value
  */
-int obtain_secret_bit(unsigned long int number, unsigned int bit_index)
+int get_bit(unsigned long int number, unsigned int index)
 {
-	int secret_val;
+	int thebit_value;
 
-	/* Guarding against wandering off the edge of reality. */
-	if (bit_index > 63)
-		return (-1);
+	if (index > 63)
+		return (-1);  /* Beyond this index, only the brave tread */
 
-	/* Initiating a communication with the mystical bit using right shift magic! */
-	secret_val = (number >> bit_index) & 1;
+	thebit_value = (number >> index) & 1;  /* Unveiling the mystery of the chosen bit */
 
-	/* Finally, revealing the hidden truth to the world! */
-	return (secret_val);
+	return (thebit_value);
 }
