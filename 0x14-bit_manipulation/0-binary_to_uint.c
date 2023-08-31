@@ -1,68 +1,53 @@
 #include "main.h"
-#include <stdio.h>
+#include <stddef.h> /* For NULL */
+#include <stdio.h> /* For printf */
 
 /**
  * binary_to_uint - Converts a binary number to an unsigned int.
- * @b: A string of 0 and 1 chars representing a binary number.
+ * @b: Pointer to a string of 0 and 1 chars.
  *
- * Return: The converted number, or 0 if invalid input or b is NULL.
+ * Return: The converted number, or 0 if invalid input.
  */
 unsigned int binary_to_uint(const char *b)
 {
-	/* Initialize variable to store the converted value */
 	unsigned int result = 0;
-	/* Initialize loop counter */
-	unsigned int i = 0;
 
-	/* Return 0 if input string is NULL */
-	if (b == NULL)
+	if (b == NULL) /* Check if the input string is NULL */
 		return (0);
 
-	/* Iterate through the string until the end */
-	while (b[i] != '\0')
+	while (*b) /* Iterate through the string until null terminator */
 	{
-		/* Check for invalid characters */
-		if (b[i] != '0' && b[i] != '1')
-			/* Return 0 if an invalid character is found */
+		if (*b != '0' && *b != '1') /* Check for invalid characters */
 			return (0);
 
-		/* Left shift the result by 1 */
-		result <<= 1;
-		/* Add the current digit to the result */
-		result += (b[i] - '0');
-		/* Move to the next character in the string */
-		i++;
+		result = result << 1; /* Left shift the current result by 1 */
+		if (*b == '1') /* If the current character is '1', add 1 to result */
+			result = result + 1;
+
+		b++; /* Move to the next character */
 	}
-	/* Return the final converted value */
+
 	return (result);
 }
 
 /**
- * main - Check the code
+ * main - Check the binary_to_uint function.
  *
  * Return: Always 0.
  */
 int main(void)
 {
-	/* Declare variable to store the converted value */
 	unsigned int n;
 
-	/* Test case: binary string "1" */
 	n = binary_to_uint("1");
 	printf("%u\n", n);
-	/* Test case: binary string "101" */
 	n = binary_to_uint("101");
 	printf("%u\n", n);
-	/* Test case: binary string with invalid character 'e' */
-	n = binary_to_uint("1e01");
-	/* This line will not execute due to invalid input */
+	n = binary_to_uint("1e01"); /* Contains an invalid character */
 	printf("%u\n", n);
-	/* Test case: binary string "1100010" */
 	n = binary_to_uint("1100010");
 	printf("%u\n", n);
-	/* Test case: long binary string */
 	n = binary_to_uint("0000000000000000000110010010");
 	printf("%u\n", n);
-	/* Return 0 to indicate successful execution */
 	return (0);
 }
