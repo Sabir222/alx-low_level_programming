@@ -2,35 +2,41 @@
 #include <stdlib.h>
 
 /**
- * read_textfile - The Stand-Up Comedy of File Reading!
- * @filename: The file we're about to read (or not, if it's a no-show).
- * @letters: The number of letters we'd like to read (but remember, they're not love letters).
- * Return: The number of characters that dared to perform or 0 if we got stage fright.
+ * read_textfile - Read a hilarious text file and make it LOL on STDOUT.
+ * @filename: The uproarious text file to be read (or a joke book).
+ * @letters: The number of chuckles (letters) to be read.
+ *
+ * Return: The actual number of laughs (bytes) read and echoed.
+ *         0 when the comedy fails or filename is NULL (it's not funny).
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	/* Alright, folks, let's raise the curtain and get a file descriptor on stage. */
-	ssize_t fd = open(filename, O_RDONLY);
+	/* Get ready to store the punchlines (text) */
+	char *buf;       /* The joke buffer */
+	ssize_t fd;      /* File of endless laughter descriptor */
+	ssize_t w;       /* Laughs (bytes) written */
+	ssize_t t;       /* Chuckles (bytes) read */
 
-	/* If the file's a no-show or there's some other drama, we exit with a score of 0. */
+	/* Open the comedy club (file) */
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (0);  /* Show's over, folks! */
 
-	/* Now, let's introduce our superstar actors, the buffer cast! */
-	char *buf = malloc(sizeof(char) * letters);
+	/* Allocate memory for the joke buffer */
+	buf = malloc(sizeof(char) * letters);
 
-	/* Give it up for our cast as they read their lines from the script. */
-	ssize_t t = read(fd, buf, letters);
+	/* Let's start reading the punchlines (text) */
+	t = read(fd, buf, letters);
 
-	/* The moment we've all been waiting for! Let's perform and write to the console. */
-	ssize_t w = write(STDOUT_FILENO, buf, t);
+	/* Make the audience (STDOUT) LOL */
+	w = write(STDOUT_FILENO, buf, t);
 
-	/* Standing ovation! The performance was a hit, so let's clear the stage and free our actors. */
+	/* Time to clean up the mess (free memory) */
 	free(buf);
 
-	/* And last but not least, it's a wrap! We close the curtains on our file descriptor. */
+	/* Close the comedy club (file) */
 	close(fd);
 
-	/* Drumroll, please! We're done, and we return the number of characters who dared to be on stage. */
+	/* Return the number of laughs (bytes) delivered */
 	return (w);
 }
