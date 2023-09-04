@@ -11,18 +11,18 @@
 char *create_buffer(char *file)
 {
     /* We're about to hire a buffer, hope it doesn't ask for a raise! */
-    char *buffer_hired;
+    char *buffer;
 
-    buffer_hired = malloc(sizeof(char) * 1024);
+    buffer = malloc(sizeof(char) * 1024);
 
-    if (buffer_hired == NULL)
+    if (buffer == NULL)
     {
         dprintf(STDERR_FILENO,
                 "Oops! Something went wrong. We ran out of buffers for file %s\n", file);
         exit(99); // Our buffer factory went on strike!
     }
 
-    return (buffer_hired); // The new buffer is ready to work!
+    return (buffer); // The new buffer is ready to work!
 }
 
 /**
@@ -32,11 +32,11 @@ char *create_buffer(char *file)
 void close_file(int fd)
 {
     /* Time to say goodbye to our clingy file descriptor! */
-    int closure_result;
+    int c;
 
-    closure_result = close(fd);
+    c = close(fd);
 
-    if (closure_result == -1)
+    if (c == -1)
     {
         dprintf(STDERR_FILENO, "Oops! We can't close fd %d. It's too clingy!\n", fd);
         exit(100); // File descriptor refused to leave the party!
@@ -58,8 +58,8 @@ void close_file(int fd)
 int main(int argc, char *argv[])
 {
     /* Let the file copying circus begin! */
-    int performer_from, performer_to, read_result, write_result;
-    char *performance_buffer;
+    int from, to, r, w;
+    char *buffer;
 
     if (argc != 3)
     {
@@ -67,38 +67,38 @@ int main(int argc, char *argv[])
         exit(97); // Someone forgot their lines, exit stage left!
     }
 
-    performance_buffer = create_buffer(argv[2]);
-    performer_from = open(argv[1], O_RDONLY);
-    read_result = read(performer_from, performance_buffer, 1024);
-    performer_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+    buffer = create_buffer(argv[2]);
+    from = open(argv[1], O_RDONLY);
+    r = read(from, buffer, 1024);
+    to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
     do {
         /* The performers are ready to amaze the audience! */
-        if (performer_from == -1 || read_result == -1)
+        if (from == -1 || r == -1)
         {
             dprintf(STDERR_FILENO,
                     "Uh-oh, file %s didn't show up for rehearsal!\n", argv[1]);
-            free(performance_buffer);
+            free(buffer);
             exit(98); // The show must go on, but not without the main act!
         }
 
-        write_result = write(performer_to, performance_buffer, read_result);
-        if (performer_to == -1 || write_result == -1)
+        w = write(to, buffer, r);
+        if (to == -1 || w == -1)
         {
             dprintf(STDERR_FILENO,
                     "Oops! File %s refused to accept the script!\n", argv[2]);
-            free(performance_buffer);
+            free(buffer);
             exit(99); /*File got stage fright, couldn't write a single line!*/
         }
 
-        read_result = read(performer_from, performance_buffer, 1024);
-        performer_to = open(argv[2], O_WRONLY | O_APPEND);
+        r = read(from, buffer, 1024);
+        to = open(argv[2], O_WRONLY | O_APPEND);
 
-    } while (read_result > 0);
+    } while (r > 0);
 
-    free(performance_buffer);
-    close_file(performer_from);
-    close_file(performer_to);
+    free(buffer);
+    close_file(from);
+    close_file(to);
 
     return (0); /*Standing ovation! The file-copying extravaganza was a success!*/
 }
