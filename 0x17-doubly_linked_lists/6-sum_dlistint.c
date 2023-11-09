@@ -1,10 +1,10 @@
 #include "lists.h"
 
 /**
- * sum_dlistint - return the sum of all the elements values.
- * @head: pointer to a linked list.
+ * sum_dlistint - 1
+ * @head: 1
  *
- * Return: the Sum (int)
+ * Return: 1
  */
 int sum_dlistint(dlistint_t *head)
 {
@@ -19,9 +19,9 @@ int sum_dlistint(dlistint_t *head)
 		while (node)
 		{
 			sum += node->n;
-			node = node->prev;
+			node = node->previouscount;
 		}
-	else if (!node->prev)
+	else if (!node->previouscount)
 		while (node)
 		{
 			sum += node->n;
@@ -29,8 +29,8 @@ int sum_dlistint(dlistint_t *head)
 		}
 	else
 	{
-		while (node->prev)
-			node = node->prev;
+		while (node->previouscount)
+			node = node->previouscount;
 		while (node)
 		{
 			sum += node->n;

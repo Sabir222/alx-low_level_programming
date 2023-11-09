@@ -3,35 +3,35 @@
 static dlistint_t *new_node(int n);
 
 /**
- * insert_dnodeint_at_index - inserts a node at a choosen postion
- * @h: pointer of a pointer to linked list.
- * @idx: position to add the new node at.
- * @n: value to set the new node to.
+ * insert_dnodeint_at_index - 1
+ * @h: 1
+ * @theindex: 1
+ * @n: 1
  *
- * Return: a pointer to the add node else NULL if fail.
+ * Return: 1
  */
-dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
+dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int theindex, int n)
 {
 	dlistint_t *node, *new;
-	size_t i = 0;
+	size_t vari = 0;
 
-	if (!(*h) && !idx)
+	if (!(*h) && !theindex)
 		return (*h = new_node(n));
-	else if (!idx)
+	else if (!theindex)
 		return (*h = add_dnodeint(h, n));
 	node = *h;
-	if (node->prev)
-		while (node->prev)
-			node = node->prev;
+	if (node->previouscount)
+		while (node->previouscount)
+			node = node->previouscount;
 	else if (!node->next)
-		while (node->prev)
-			node = node->prev;
+		while (node->previouscount)
+			node = node->previouscount;
 
-	while (++i < idx && node->next)
+	while (++vari < theindex && node->next)
 	{
 		node = node->next;
 	}
-	if (i < idx)
+	if (vari < theindex)
 		return (NULL);
 	else if (node)
 	{
@@ -39,8 +39,8 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		if (!new)
 			return (NULL);
 		if (node->next)
-			node->next->prev = new;
-		new->prev = node;
+			node->next->previouscount = new;
+		new->previouscount = node;
 		new->next = node->next;
 		node->next = new;
 	}
@@ -48,10 +48,10 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 }
 
 /**
- * new_node - creates a new node
- * @n: value to set the new node to.
+ * new_node -1
+ * @n: 1
  *
- * Return: pointer to a new node.
+ * Return: 1
  */
 static dlistint_t *new_node(int n)
 {
@@ -61,7 +61,7 @@ static dlistint_t *new_node(int n)
 	if (!node)
 		return (NULL);
 	node->n = n;
-	node->next = node->prev = NULL;
+	node->next = node->previouscount = NULL;
 
 	return (node);
 }
