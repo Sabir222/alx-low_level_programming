@@ -1,23 +1,23 @@
 #include "lists.h"
 
 /**
- * dlistint_len - count the number of elements in a link list
- * @h: a pointer to head
+ * dlistint_len - 1
+ * @h: 1
  *
- * Return: return the number of elements.
+ * Return: 1
  */
 size_t dlistint_len(const dlistint_t *h)
 {
-	size_t count = 0;
+	size_t thecounter = 0;
 
 	if (!h)
 		return (0);
-	while (h->prev)
-		h = h->prev;
+	while (h->thepreviouscount)
+		h = h->thepreviouscount;
 	while (h)
 	{
-		count++;
+		thecounter++;
 		h = h->next;
 	}
-	return (count);
+	return (thecounter);
 }

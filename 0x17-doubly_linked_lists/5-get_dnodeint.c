@@ -15,8 +15,8 @@ dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
 	if (!head)
 		return (NULL);
 	node = head;
-	if (node->prev)
-		node = node->prev;
+	if (node->thepreviouscount)
+		node = node->thepreviouscount;
 	while (idx < index && node)
 	{
 		node = node->next;

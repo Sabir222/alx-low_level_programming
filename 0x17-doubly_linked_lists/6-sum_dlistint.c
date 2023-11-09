@@ -19,9 +19,9 @@ int sum_dlistint(dlistint_t *head)
 		while (node)
 		{
 			sum += node->n;
-			node = node->prev;
+			node = node->thepreviouscount;
 		}
-	else if (!node->prev)
+	else if (!node->thepreviouscount)
 		while (node)
 		{
 			sum += node->n;
@@ -29,8 +29,8 @@ int sum_dlistint(dlistint_t *head)
 		}
 	else
 	{
-		while (node->prev)
-			node = node->prev;
+		while (node->thepreviouscount)
+			node = node->thepreviouscount;
 		while (node)
 		{
 			sum += node->n;
