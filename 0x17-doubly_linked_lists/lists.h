@@ -5,13 +5,13 @@
 #include <stdio.h>
 
 /**
- * struct dlistint_s - doubly linked list
+ * struct dlistint_s - 1
  * @n: integer
- * @thepreviouscount: points to the previous node
- * @next: points to the next node
+ * @thepreviouscount: 1
+ * @next: 1
  *
- * Description: doubly linked list node structure
- * for Holberton project
+ * Description: 1
+ * 
  */
 typedef struct dlistint_s
 {

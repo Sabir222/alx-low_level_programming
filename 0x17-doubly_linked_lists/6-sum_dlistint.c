@@ -1,10 +1,10 @@
 #include "lists.h"
 
 /**
- * sum_dlistint - return the sum of all the elements values.
- * @head: pointer to a linked list.
+ * sum_dlistint - 1
+ * @head: 1
  *
- * Return: the Sum (int)
+ * Return: 1
  */
 int sum_dlistint(dlistint_t *head)
 {
